@@ -7,6 +7,7 @@ $(function(e) {
 			"visPage": 7
 		});
 	}
+	var last = "";
 	$("#i").on("keypress", function(e) {
 		if(e.which == 13) {
 			var v = $("#i").val();
@@ -34,7 +35,8 @@ $(function(e) {
 					// $(".pob.cl.y").remove();
 					// $(".pstatus").remove();
 					console.log("page:" + i + " get!");
-					if(i < maxPage) {
+					if(i < maxPage || p != last) {
+						last = p;
 						getHtml(parseInt(i) + 1);
 					}else {
 						console.log("all done!!!");
