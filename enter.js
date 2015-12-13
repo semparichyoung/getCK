@@ -11,17 +11,32 @@ $(function(e) {
 	$("#i").on("keypress", function(e) {
 		if(e.which == 13) {
 			var v = $("#i").val();
-			var vary = v.split("=");
-			var maxPage = vary[vary.length - 1];
-			maxPage = $("#end").val() || maxPage
+			var vary;
+			var maxPage;
+			if(v.indexOf("=") >= 0) {
+				vary = v.split("=");
 				delete vary[vary.length - 1];
-			v = vary.join("=");
+				v = vary.join("=");
+			}else {
+				vary = v.split("-");
+				var vl = vary.length - 2;
+				vary[vl] = 1;
+				v = vary.join("-");
+			}
+			maxPage = $("#end").val();
 			console.log(v);
 			console.log("start:" + $("#start").val());
 			getHtml($("#start").val());
 			function getHtml(i) {
-				console.log("get:" + v + i);
-				$.get("get.php", {"url": v + i}, function(e) {
+				var url
+				if(typeof vl == "undefined") {
+					url = v + i;
+				}else {
+					vary[vl] = i;
+					url = vary.join("-");
+				}
+				console.log("get:" + url);
+				$.get("get.php", {"url": url}, function(e) {
 					var ele = $(e);
 					var p = $(".plhin", ele);
 					p.find(".plsTitle").remove();
@@ -35,7 +50,7 @@ $(function(e) {
 					// $(".pob.cl.y").remove();
 					// $(".pstatus").remove();
 					console.log("page:" + i + " get!");
-					if(i < maxPage || p != last) {
+					if((maxPage.length > 0 && i < maxPage) || p != last) {
 						last = p;
 						getHtml(parseInt(i) + 1);
 					}else {
