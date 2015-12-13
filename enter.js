@@ -45,6 +45,7 @@ $(function(e) {
 					p.find("div.article_plc_user").remove();
 					p.find(".viewRate").remove();
 					p.find("a").remove();
+					p.find("img").remove();
 					$("#area").append(p);
 					// $(".plsTitle").remove();
 					// $(".pob.cl.y").remove();
