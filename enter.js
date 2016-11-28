@@ -39,6 +39,8 @@ $(function(e) {
 				$.get("get.php", {"url": url}, function(e) {
 					var ele = $(e);
 					var p = $(".plhin", ele);
+					var p = p.find(".t_f").html();
+					/*
 					p.find(".plsTitle").remove();
 					p.find(".pob.cl.y").remove();
 					p.find(".pstatus").remove();
@@ -46,6 +48,7 @@ $(function(e) {
 					p.find(".viewRate").remove();
 					p.find("a").remove();
 					p.find("img").remove();
+					*/
 					$("#area").append(p);
 					// $(".plsTitle").remove();
 					// $(".pob.cl.y").remove();
